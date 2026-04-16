@@ -17,4 +17,5 @@
 - [x] Run pnpm test - all 14 tests pass
 - [x] Save checkpoint
 - [x] Change auto-refresh interval from 30 minutes to once per day (24 hours) in dashboard.html
-- [ ] Compose Japanese promotional tweet (120 chars, with hashtags #石油備蓄 #ガソリン #ホルムズ海峡 #イラン情勢)
+- [x] Compose Japanese promotional tweet (120 chars, with hashtags #石油備蓄 #ガソリン #ホルムズ海峡 #イラン情勢)
+- [x] Fix 500 error on /api/data/gasoline-prices and /api/data/oil-reserves (file path resolution fails in compiled server)

@@ -14,6 +14,14 @@ import { serveStatic, setupVite } from "./vite";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Resolve the project root regardless of whether we are running from
+// server/_core/ (dev via tsx) or dist/ (production build via esbuild).
+// In dev:  __dirname = <root>/server/_core  → root is ../../
+// In prod: __dirname = <root>/dist          → root is ../
+// Using process.cwd() is the most reliable anchor since the server is
+// always started from the project root.
+const PROJECT_ROOT = process.cwd();
+
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
     const server = net.createServer();
@@ -42,7 +50,7 @@ async function startServer() {
   // Data API endpoints — serve JSON files from server/data/
   app.get("/api/data/gasoline-prices", (_req, res) => {
     try {
-      const dataPath = join(__dirname, "../data/gasoline_prices.json");
+      const dataPath = join(PROJECT_ROOT, "server/data/gasoline_prices.json");
       const raw = readFileSync(dataPath, "utf-8");
       res.setHeader("Content-Type", "application/json");
       res.setHeader("Cache-Control", "public, max-age=1800");
@@ -55,7 +63,7 @@ async function startServer() {
 
   app.get("/api/data/oil-reserves", (_req, res) => {
     try {
-      const dataPath = join(__dirname, "../data/oil_reserves.json");
+      const dataPath = join(PROJECT_ROOT, "server/data/oil_reserves.json");
       const raw = readFileSync(dataPath, "utf-8");
       res.setHeader("Content-Type", "application/json");
       res.setHeader("Cache-Control", "public, max-age=1800");

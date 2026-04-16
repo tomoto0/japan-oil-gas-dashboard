@@ -8,6 +8,9 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+// Use process.cwd() to mirror the fix applied in server/_core/index.ts
+const PROJECT_ROOT = process.cwd();
+
 // ---------------------------------------------------------------
 // Minimal Express app that mirrors the data API routes in _core/index.ts
 // ---------------------------------------------------------------
@@ -16,7 +19,7 @@ function createTestApp() {
 
   app.get("/api/data/gasoline-prices", (_req, res) => {
     try {
-      const dataPath = join(__dirname, "data/gasoline_prices.json");
+      const dataPath = join(PROJECT_ROOT, "server/data/gasoline_prices.json");
       const raw = readFileSync(dataPath, "utf-8");
       res.setHeader("Content-Type", "application/json");
       res.setHeader("Cache-Control", "public, max-age=1800");
@@ -28,7 +31,7 @@ function createTestApp() {
 
   app.get("/api/data/oil-reserves", (_req, res) => {
     try {
-      const dataPath = join(__dirname, "data/oil_reserves.json");
+      const dataPath = join(PROJECT_ROOT, "server/data/oil_reserves.json");
       const raw = readFileSync(dataPath, "utf-8");
       res.setHeader("Content-Type", "application/json");
       res.setHeader("Cache-Control", "public, max-age=1800");
