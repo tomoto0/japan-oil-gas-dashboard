@@ -19,3 +19,5 @@
 - [x] Change auto-refresh interval from 30 minutes to once per day (24 hours) in dashboard.html
 - [x] Compose Japanese promotional tweet (120 chars, with hashtags #石油備蓄 #ガソリン #ホルムズ海峡 #イラン情勢)
 - [x] Fix 500 error on /api/data/gasoline-prices and /api/data/oil-reserves (file path resolution fails in compiled server)
+- [x] Upload user-provided OGP image to CDN
+- [x] Update client/index.html with comprehensive SNS meta tags (OGP, Twitter Card, LINE, Facebook, etc.)

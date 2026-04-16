@@ -1,28 +1,109 @@
 <!doctype html>
-<html lang="ja">
+<html lang="ja" prefix="og: https://ogp.me/ns# fb: https://ogp.me/ns/fb#">
 
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+
+    <!-- ============================================================
+         PRIMARY META
+    ============================================================ -->
     <title>日本の石油備蓄・ガソリン価格ダッシュボード | 資源エネルギー庁データ</title>
     <meta name="description" content="資源エネルギー庁の公開データに基づく日本のガソリン価格・石油備蓄状況をリアルタイムで可視化。レギュラー・ハイオク・軽油・灯油の価格推移と国家・民間備蓄日数をグラフで確認できます。" />
-    <meta name="keywords" content="ガソリン価格,石油備蓄,資源エネルギー庁,レギュラーガソリン,石油製品価格,国家備蓄,民間備蓄,エネルギーデータ,日本,燃料価格,灯油価格,軽油価格" />
+    <meta name="keywords" content="ガソリン価格,石油備蓄,資源エネルギー庁,レギュラーガソリン,石油製品価格,国家備蓄,民間備蓄,エネルギーデータ,日本,燃料価格,灯油価格,軽油価格,ホルムズ海峡,イラン情勢,エネルギー安全保障" />
     <meta name="author" content="Japan Oil &amp; Gas Dashboard" />
     <meta name="robots" content="index, follow" />
-    <!-- Open Graph / Facebook -->
+    <meta name="theme-color" content="#1a5276" />
+    <link rel="canonical" href="https://japanogdash-n4vme7nz.manus.space/" />
+
+    <!-- ============================================================
+         OPEN GRAPH (Facebook / LINE / Slack / Discord / Mixi / その他)
+         og:image 推奨サイズ: 1200×630 以上。ここでは 2752×1536 を使用。
+         LINE は og:image を優先するため OGP 設定だけで対応可能。
+    ============================================================ -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="日本の石油備蓄・ガソリン価格ダッシュボード" />
     <meta property="og:title" content="日本の石油備蓄・ガソリン価格ダッシュボード" />
-    <meta property="og:description" content="資源エネルギー庁の公開データに基づく日本のガソリン価格・石油備蓄状況をリアルタイムで可視化。" />
-    <meta property="og:image" content="https://d2xsxph8kpxj0f.cloudfront.net/310419663027084947/N4vMe7Nz5NpJNrk9cdwMAW/ogp-japan-energy-dashboard-Lfsdqrxwwm9TNwJawV7vjm.png" />
+    <meta property="og:description" content="資源エネルギー庁の公開データに基づく日本のガソリン価格・石油備蓄状況をリアルタイムで可視化。価格推移・国家備蓄・民間備蓄を一目でチェック。" />
+    <meta property="og:url" content="https://japanogdash-n4vme7nz.manus.space/" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:image" content="https://d2xsxph8kpxj0f.cloudfront.net/310419663027084947/N4vMe7Nz5NpJNrk9cdwMAW/ogp-user-provided_f554d119.png" />
+    <meta property="og:image:secure_url" content="https://d2xsxph8kpxj0f.cloudfront.net/310419663027084947/N4vMe7Nz5NpJNrk9cdwMAW/ogp-user-provided_f554d119.png" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="2752" />
     <meta property="og:image:height" content="1536" />
-    <meta property="og:site_name" content="Japan Oil &amp; Gas Dashboard" />
-    <meta property="og:locale" content="ja_JP" />
-    <!-- Twitter Card -->
+    <meta property="og:image:alt" content="日本の石油備蓄・ガソリン価格ダッシュボード — 資源エネルギー庁データ可視化" />
+
+    <!-- ============================================================
+         TWITTER / X CARD
+         summary_large_image: 大きな横長プレビューカードを表示。
+         X は og:* を fallback として読むが、twitter:* を明示すると確実。
+    ============================================================ -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="日本の石油備蓄・ガソリン価格ダッシュボード" />
-    <meta name="twitter:description" content="資源エネルギー庁の公開データに基づく日本のガソリン価格・石油備蓄状況をリアルタイムで可視化。" />
-    <meta name="twitter:image" content="https://d2xsxph8kpxj0f.cloudfront.net/310419663027084947/N4vMe7Nz5NpJNrk9cdwMAW/ogp-japan-energy-dashboard-Lfsdqrxwwm9TNwJawV7vjm.png" />
+    <meta name="twitter:description" content="資源エネルギー庁の公開データに基づく日本のガソリン価格・石油備蓄状況をリアルタイムで可視化。価格推移・国家備蓄・民間備蓄を一目でチェック。" />
+    <meta name="twitter:image" content="https://d2xsxph8kpxj0f.cloudfront.net/310419663027084947/N4vMe7Nz5NpJNrk9cdwMAW/ogp-user-provided_f554d119.png" />
+    <meta name="twitter:image:alt" content="日本の石油備蓄・ガソリン価格ダッシュボード — 資源エネルギー庁データ可視化" />
+    <meta name="twitter:domain" content="japanogdash-n4vme7nz.manus.space" />
+
+    <!-- ============================================================
+         LINE (og:* で自動対応。追加で line-og:* は不要)
+         LINE プレビューは og:image を 1200×630 にトリミングして表示するが
+         2752×1536 でも中央クロップで問題なく表示される。
+    ============================================================ -->
+
+    <!-- ============================================================
+         FACEBOOK 追加設定
+         fb:app_id は任意だが設定するとインサイトが使えるようになる。
+         og:* で基本設定は完了しているため追加タグは最小限。
+    ============================================================ -->
+    <!-- <meta property="fb:app_id" content="YOUR_FB_APP_ID" /> -->
+
+    <!-- ============================================================
+         DISCORD / SLACK
+         どちらも og:* を読むため追加タグ不要。
+         Discord は og:image:width / og:image:height を参照して
+         アスペクト比を正しく表示する。
+    ============================================================ -->
+
+    <!-- ============================================================
+         STRUCTURED DATA (JSON-LD) — Google 検索・リッチリザルト向け
+    ============================================================ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "日本の石油備蓄・ガソリン価格ダッシュボード",
+      "description": "資源エネルギー庁の公開データに基づく日本のガソリン価格・石油備蓄状況をリアルタイムで可視化するダッシュボード。",
+      "url": "https://japanogdash-n4vme7nz.manus.space/",
+      "applicationCategory": "DataVisualization",
+      "operatingSystem": "Any",
+      "inLanguage": "ja",
+      "image": "https://d2xsxph8kpxj0f.cloudfront.net/310419663027084947/N4vMe7Nz5NpJNrk9cdwMAW/ogp-user-provided_f554d119.png",
+      "author": {
+        "@type": "Organization",
+        "name": "Japan Oil & Gas Dashboard"
+      },
+      "about": [
+        { "@type": "Thing", "name": "ガソリン価格" },
+        { "@type": "Thing", "name": "石油備蓄" },
+        { "@type": "Thing", "name": "資源エネルギー庁" },
+        { "@type": "Thing", "name": "エネルギー安全保障" }
+      ]
+    }
+    </script>
+
+    <!-- ============================================================
+         FAVICON / PWA
+    ============================================================ -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="application-name" content="石油備蓄ダッシュボード" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="石油備蓄DB" />
+    <meta name="msapplication-TileColor" content="#1a5276" />
+    <meta name="format-detection" content="telephone=no" />
   </head>
 
   <body>
