@@ -2,11 +2,17 @@ import "dotenv/config";
 import express from "express";
 import { createServer } from "http";
 import net from "net";
+import { readFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 import { createExpressMiddleware } from "@trpc/server/adapters/express";
 import { registerOAuthRoutes } from "./oauth";
 import { appRouter } from "../routers";
 import { createContext } from "./context";
 import { serveStatic, setupVite } from "./vite";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -33,6 +39,33 @@ async function startServer() {
   // Configure body parser with larger size limit for file uploads
   app.use(express.json({ limit: "50mb" }));
   app.use(express.urlencoded({ limit: "50mb", extended: true }));
+  // Data API endpoints — serve JSON files from server/data/
+  app.get("/api/data/gasoline-prices", (_req, res) => {
+    try {
+      const dataPath = join(__dirname, "../data/gasoline_prices.json");
+      const raw = readFileSync(dataPath, "utf-8");
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Cache-Control", "public, max-age=1800");
+      res.send(raw);
+    } catch (err) {
+      console.error("[API] Failed to read gasoline_prices.json:", err);
+      res.status(500).json({ error: "Failed to load gasoline price data" });
+    }
+  });
+
+  app.get("/api/data/oil-reserves", (_req, res) => {
+    try {
+      const dataPath = join(__dirname, "../data/oil_reserves.json");
+      const raw = readFileSync(dataPath, "utf-8");
+      res.setHeader("Content-Type", "application/json");
+      res.setHeader("Cache-Control", "public, max-age=1800");
+      res.send(raw);
+    } catch (err) {
+      console.error("[API] Failed to read oil_reserves.json:", err);
+      res.status(500).json({ error: "Failed to load oil reserve data" });
+    }
+  });
+
   // OAuth callback under /api/oauth/callback
   registerOAuthRoutes(app);
   // tRPC API

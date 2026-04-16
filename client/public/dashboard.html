@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本の石油備蓄・ガソリン価格ダッシュボード | 資源エネルギー庁データ</title>
+    <meta name="description" content="資源エネルギー庁の公開データに基づく日本のガソリン価格・石油備蓄状況をリアルタイムで可視化。レギュラー・ハイオク・軽油・灯油の価格推移と国家・民間備蓄日数をグラフで確認できます。">
+    <meta name="keywords" content="ガソリン価格,石油備蓄,資源エネルギー庁,レギュラーガソリン,石油製品価格,国家備蓄,民間備蓄,エネルギーデータ,日本,燃料価格">
+    <meta name="author" content="Japan Oil &amp; Gas Dashboard">
+    <meta name="robots" content="index, follow">
+    <!-- OGP / Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="日本の石油備蓄・ガソリン価格ダッシュボード">
+    <meta property="og:description" content="資源エネルギー庁の公開データに基づく日本のガソリン価格・石油備蓄状況をリアルタイムで可視化。">
+    <meta property="og:site_name" content="Japan Oil &amp; Gas Dashboard">
+    <meta property="og:locale" content="ja_JP">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="日本の石油備蓄・ガソリン価格ダッシュボード">
+    <meta name="twitter:description" content="資源エネルギー庁の公開データに基づく日本のガソリン価格・石油備蓄状況をリアルタイムで可視化。">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --accent: #e74c3c;
+            --accent-orange: #e67e22;
+            --bg: #f0f3f7;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        header p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            margin-top: 0.3rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem;
+        }
+        .status-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            font-size: 0.85rem;
+        }
+        .status-bar .update-info { color: var(--text-light); }
+        .status-bar .update-info strong { color: var(--text); }
+        .status-bar button {
+            background: var(--primary-light);
+            color: white;
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+        .status-bar button:hover { background: var(--primary); }
+        .status-bar button:disabled { background: #bdc3c7; cursor: not-allowed; }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .kpi-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.2rem;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary-light);
+        }
+        .kpi-card.alert { border-left-color: var(--accent); }
+        .kpi-card.warn { border-left-color: var(--accent-orange); }
+        .kpi-card .label {
+            font-size: 0.78rem;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+        .kpi-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .kpi-card.alert .value { color: var(--accent); }
+        .kpi-card.warn .value { color: var(--accent-orange); }
+        .kpi-card .unit {
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: var(--text-light);
+            margin-left: 0.2rem;
+        }
+        .kpi-card .changes {
+            margin-top: 0.4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+        }
+        .kpi-card .change {
+            font-size: 0.75rem;
+        }
+        .kpi-card .change.up { color: var(--accent); }
+        .kpi-card .change.down { color: #27ae60; }
+        .kpi-card .change.neutral { color: var(--text-light); }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 900px) {
+            .chart-grid.two-col {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .chart-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+        .chart-card h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .chart-wrapper {
+            position: relative;
+            width: 100%;
+            max-height: 400px;
+        }
+
+        .source-info {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+        .source-info h3 {
+            font-size: 0.9rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .source-info ul {
+            list-style: none;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+        .source-info ul li { margin-bottom: 0.3rem; }
+        .source-info a { color: var(--primary-light); text-decoration: none; }
+        .source-info a:hover { text-decoration: underline; }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.7);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+        .loading-overlay.active { display: flex; }
+        .spinner {
+            width: 40px; height: 40px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary-light);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.2rem; }
+            .container { padding: 1rem; }
+            .kpi-card .value { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loading"><div class="spinner"></div></div>
+    <header>
+        <h1>日本の石油備蓄・ガソリン価格ダッシュボード</h1>
+        <p>資源エネルギー庁の公開データに基づく最新情報</p>
+    </header>
+
+    <div class="container">
+        <div class="status-bar">
+            <div class="update-info">
+                最終データ更新: <strong id="lastUpdate">--</strong>
+                <span id="dataSource"></span>
+            </div>
+            <button id="refreshBtn" onclick="refreshData()">データ更新</button>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card" id="card-gas">
+                <div class="label">レギュラーガソリン全国平均</div>
+                <div class="value" id="kpiGasPrice">--<span class="unit">円/L</span></div>
+                <div class="changes">
+                    <div class="change" id="kpiGasWeekChange"></div>
+                    <div class="change" id="kpiGasMonthChange"></div>
+                </div>
+            </div>
+            <div class="kpi-card warn" id="card-total">
+                <div class="label">石油備蓄日数（合計）</div>
+                <div class="value" id="kpiReserveDays">--<span class="unit">日</span></div>
+                <div class="changes">
+                    <div class="change" id="kpiReserveMonthChange"></div>
+                    <div class="change" id="kpiReserve3mChange"></div>
+                </div>
+            </div>
+            <div class="kpi-card" id="card-national">
+                <div class="label">国家備蓄</div>
+                <div class="value" id="kpiNational">--<span class="unit">日</span></div>
+                <div class="changes">
+                    <div class="change" id="kpiNationalMonthChange"></div>
+                    <div class="change" id="kpiNational3mChange"></div>
+                </div>
+            </div>
+            <div class="kpi-card" id="card-private">
+                <div class="label">民間備蓄</div>
+                <div class="value" id="kpiPrivate">--<span class="unit">日</span></div>
+                <div class="changes">
+                    <div class="change" id="kpiPrivateMonthChange"></div>
+                    <div class="change" id="kpiPrivate3mChange"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h2>レギュラーガソリン全国平均小売価格の推移</h2>
+                <div class="chart-wrapper">
+                    <canvas id="gasPriceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-grid two-col">
+            <div class="chart-card">
+                <h2>石油製品価格の推移（円/L）</h2>
+                <div class="chart-wrapper">
+                    <canvas id="fuelCompareChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h2>灯油価格の推移（円/18L）</h2>
+                <div class="chart-wrapper">
+                    <canvas id="keroseneChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-grid">
+            <div class="chart-card">
+                <h2>石油備蓄日数の推移</h2>
+                <div class="chart-wrapper">
+                    <canvas id="reserveDaysChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-grid two-col">
+            <div class="chart-card">
+                <h2>備蓄量の内訳（万kL）</h2>
+                <div class="chart-wrapper">
+                    <canvas id="reserveVolumeChart"></canvas>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h2>最新の備蓄構成比</h2>
+                <div class="chart-wrapper">
+                    <canvas id="reservePieChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="source-info">
+            <h3>データソース・注記</h3>
+            <ul>
+                <li>ガソリン価格: <a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl007/results.html" target="_blank" rel="noopener">資源エネルギー庁 石油製品価格調査</a>（毎週月曜日調査・水曜日公表）</li>
+                <li>石油備蓄: <a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/results.html" target="_blank" rel="noopener">資源エネルギー庁 石油備蓄の現況</a>（毎月公表）</li>
+                <li>データはバックエンドAPIより取得。ブラウザは30分ごとに自動更新します。</li>
+                <li>備蓄日数はIEA基準（90日以上が目標水準）。</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Japan Oil &amp; Gas Dashboard &mdash; データ出典: 経済産業省 資源エネルギー庁
+    </footer>
+
+    <script>
+    // ============================================================
+    // Data Management — fetch from backend REST API
+    // ============================================================
+    let gasolineData = null;
+    let reserveData = null;
+    let charts = {};
+
+    async function loadJSON(endpoint) {
+        const res = await fetch(endpoint + '?t=' + Date.now());
+        if (!res.ok) throw new Error('Failed to load ' + endpoint);
+        return res.json();
+    }
+
+    async function loadAllData() {
+        const [gas, reserve] = await Promise.all([
+            loadJSON('/api/data/gasoline-prices'),
+            loadJSON('/api/data/oil-reserves')
+        ]);
+        gasolineData = gas;
+        reserveData = reserve;
+    }
+
+    // ============================================================
+    // KPI Updates — week-over-week AND month-over-month
+    // ============================================================
+    function fmtDiff(diff, unit, label) {
+        const sign = diff >= 0 ? '+' : '';
+        const cls = diff > 0 ? 'up' : diff < 0 ? 'down' : 'neutral';
+        return { text: `${label} ${sign}${diff.toFixed ? diff.toFixed(1) : diff}${unit}`, cls };
+    }
+
+    function setChange(elId, diff, unit, label) {
+        const el = document.getElementById(elId);
+        if (!el) return;
+        const { text, cls } = fmtDiff(diff, unit, label);
+        el.textContent = text;
+        el.className = 'change ' + cls;
+    }
+
+    function updateKPIs() {
+        if (!gasolineData || !reserveData) return;
+
+        // ---- Gasoline KPI ----
+        const gw = gasolineData.weekly;
+        const latest = gw[gw.length - 1];
+        const prev   = gw[gw.length - 2];
+
+        // Find entry ~4 weeks ago (approx 1 month back)
+        const latestDate = new Date(latest.date);
+        let monthAgoIdx = gw.length - 2;
+        for (let i = gw.length - 2; i >= 0; i--) {
+            const d = new Date(gw[i].date);
+            const diffDays = (latestDate - d) / 86400000;
+            if (diffDays >= 28) { monthAgoIdx = i; break; }
+        }
+        const monthAgo = gw[monthAgoIdx];
+
+        document.getElementById('kpiGasPrice').innerHTML =
+            latest.regular.toFixed(1) + '<span class="unit">円/L</span>';
+
+        // Week-over-week
+        setChange('kpiGasWeekChange', latest.regular - prev.regular, '円', `前週比（${latest.date}）`);
+        // Month-over-month (~4 weeks)
+        setChange('kpiGasMonthChange', latest.regular - monthAgo.regular, '円', `約1ヶ月比（${monthAgo.date}比）`);
+
+        // ---- Reserve KPIs ----
+        const rm = reserveData.monthly;
+        const latestR = rm[rm.length - 1];
+        const prevR   = rm[rm.length - 2];
+        const prev3R  = rm.length >= 4 ? rm[rm.length - 4] : rm[0];
+
+        document.getElementById('kpiReserveDays').innerHTML =
+            latestR.total_days + '<span class="unit">日</span>';
+        // Month-over-month
+        setChange('kpiReserveMonthChange', latestR.total_days - prevR.total_days, '日', `前月比（${latestR.date}末）`);
+        // 3-month change
+        const diff3m = latestR.total_days - prev3R.total_days;
+        setChange('kpiReserve3mChange', diff3m, '日', `3ヶ月比（${prev3R.date}比）`);
+
+        // National
+        document.getElementById('kpiNational').innerHTML =
+            latestR.national_days + '<span class="unit">日</span>';
+        setChange('kpiNationalMonthChange', latestR.national_days - prevR.national_days, '日', `前月比（${latestR.date}末）`);
+        setChange('kpiNational3mChange', latestR.national_days - prev3R.national_days, '日', `3ヶ月比（${prev3R.date}比）`);
+
+        // Private
+        document.getElementById('kpiPrivate').innerHTML =
+            latestR.private_days + '<span class="unit">日</span>';
+        setChange('kpiPrivateMonthChange', latestR.private_days - prevR.private_days, '日', `前月比（${latestR.date}末）`);
+        setChange('kpiPrivate3mChange', latestR.private_days - prev3R.private_days, '日', `3ヶ月比（${prev3R.date}比）`);
+
+        // Timestamp
+        const dates = [gasolineData.metadata.last_updated, reserveData.metadata.last_updated];
+        dates.sort();
+        document.getElementById('lastUpdate').textContent = dates[dates.length - 1];
+    }
+
+    // ============================================================
+    // Chart Defaults
+    // ============================================================
+    const CHART_COLORS = {
+        blue:       'rgba(41, 128, 185, 1)',
+        blueFill:   'rgba(41, 128, 185, 0.12)',
+        red:        'rgba(231, 76, 60, 1)',
+        redFill:    'rgba(231, 76, 60, 0.12)',
+        orange:     'rgba(230, 126, 34, 1)',
+        orangeFill: 'rgba(230, 126, 34, 0.12)',
+        green:      'rgba(39, 174, 96, 1)',
+        greenFill:  'rgba(39, 174, 96, 0.12)',
+        purple:     'rgba(142, 68, 173, 1)',
+        purpleFill: 'rgba(142, 68, 173, 0.12)',
+        teal:       'rgba(22, 160, 133, 1)',
+        tealFill:   'rgba(22, 160, 133, 0.12)',
+    };
+
+    Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Hiragino Kaku Gothic ProN', sans-serif";
+    Chart.defaults.font.size = 12;
+    Chart.defaults.plugins.legend.labels.usePointStyle = true;
+    Chart.defaults.plugins.legend.labels.pointStyleWidth = 12;
+    Chart.defaults.responsive = true;
+    Chart.defaults.maintainAspectRatio = false;
+
+    function timeAxis(min) {
+        return {
+            type: 'time',
+            time: { tooltipFormat: 'yyyy/MM/dd' },
+            min: min,
+            ticks: { maxTicksLimit: 12 }
+        };
+    }
+
+    // ============================================================
+    // Build Charts — all 6 intact from original
+    // ============================================================
+    function buildGasPriceChart() {
+        const w = gasolineData.weekly;
+        const ctx = document.getElementById('gasPriceChart').getContext('2d');
+        if (charts.gasPrice) charts.gasPrice.destroy();
+        charts.gasPrice = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: w.map(d => d.date),
+                datasets: [{
+                    label: 'レギュラー',
+                    data: w.map(d => d.regular),
+                    borderColor: CHART_COLORS.red,
+                    backgroundColor: CHART_COLORS.redFill,
+                    fill: true,
+                    tension: 0.3,
+                    pointRadius: 2,
+                    pointHoverRadius: 5,
+                    borderWidth: 2.5
+                }]
+            },
+            options: {
+                scales: {
+                    x: timeAxis(w[0].date),
+                    y: { title: { display: true, text: '円/L' }, beginAtZero: false }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y.toFixed(1)} 円/L`
+                        }
+                    }
+                },
+                interaction: { intersect: false, mode: 'index' }
+            }
+        });
+    }
+
+    function buildFuelCompareChart() {
+        const w = gasolineData.weekly;
+        const ctx = document.getElementById('fuelCompareChart').getContext('2d');
+        if (charts.fuelCompare) charts.fuelCompare.destroy();
+        charts.fuelCompare = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: w.map(d => d.date),
+                datasets: [
+                    {
+                        label: 'レギュラー',
+                        data: w.map(d => d.regular),
+                        borderColor: CHART_COLORS.red,
+                        borderWidth: 2, tension: 0.3, pointRadius: 1
+                    },
+                    {
+                        label: 'ハイオク',
+                        data: w.map(d => d.premium),
+                        borderColor: CHART_COLORS.orange,
+                        borderWidth: 2, tension: 0.3, pointRadius: 1
+                    },
+                    {
+                        label: '軽油',
+                        data: w.map(d => d.diesel),
+                        borderColor: CHART_COLORS.blue,
+                        borderWidth: 2, tension: 0.3, pointRadius: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: timeAxis(w[0].date),
+                    y: { title: { display: true, text: '円/L' }, beginAtZero: false }
+                },
+                interaction: { intersect: false, mode: 'index' }
+            }
+        });
+    }
+
+    function buildKeroseneChart() {
+        const w = gasolineData.weekly;
+        const ctx = document.getElementById('keroseneChart').getContext('2d');
+        if (charts.kerosene) charts.kerosene.destroy();
+        charts.kerosene = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: w.map(d => d.date),
+                datasets: [{
+                    label: '灯油（店頭）',
+                    data: w.map(d => d.kerosene_18L),
+                    borderColor: CHART_COLORS.purple,
+                    backgroundColor: CHART_COLORS.purpleFill,
+                    fill: true,
+                    tension: 0.3, pointRadius: 1, borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    x: timeAxis(w[0].date),
+                    y: { title: { display: true, text: '円/18L' }, beginAtZero: false }
+                },
+                interaction: { intersect: false, mode: 'index' }
+            }
+        });
+    }
+
+    function buildReserveDaysChart() {
+        const m = reserveData.monthly;
+        const ctx = document.getElementById('reserveDaysChart').getContext('2d');
+        if (charts.reserveDays) charts.reserveDays.destroy();
+        charts.reserveDays = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: m.map(d => d.date),
+                datasets: [
+                    {
+                        label: '国家備蓄',
+                        data: m.map(d => d.national_days),
+                        backgroundColor: 'rgba(41, 128, 185, 0.85)',
+                        stack: 'stack'
+                    },
+                    {
+                        label: '民間備蓄',
+                        data: m.map(d => d.private_days),
+                        backgroundColor: 'rgba(230, 126, 34, 0.85)',
+                        stack: 'stack'
+                    },
+                    {
+                        label: '産油国共同備蓄',
+                        data: m.map(d => d.joint_days),
+                        backgroundColor: 'rgba(39, 174, 96, 0.85)',
+                        stack: 'stack'
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: { stacked: true, ticks: { maxTicksLimit: 12 } },
+                    y: { stacked: true, title: { display: true, text: '日数' }, beginAtZero: true }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            afterBody: function(tooltipItems) {
+                                const idx = tooltipItems[0].dataIndex;
+                                return `合計: ${m[idx].total_days}日`;
+                            }
+                        }
+                    }
+                },
+                interaction: { intersect: false, mode: 'index' }
+            }
+        });
+    }
+
+    function buildReserveVolumeChart() {
+        const m = reserveData.monthly;
+        const ctx = document.getElementById('reserveVolumeChart').getContext('2d');
+        if (charts.reserveVolume) charts.reserveVolume.destroy();
+        charts.reserveVolume = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: m.map(d => d.date),
+                datasets: [
+                    {
+                        label: '合計',
+                        data: m.map(d => d.total_volume_10k_kl),
+                        borderColor: CHART_COLORS.red,
+                        borderWidth: 2.5, tension: 0.3, pointRadius: 2
+                    },
+                    {
+                        label: '国家備蓄',
+                        data: m.map(d => d.national_volume_10k_kl),
+                        borderColor: CHART_COLORS.blue,
+                        borderWidth: 2, tension: 0.3, pointRadius: 1
+                    },
+                    {
+                        label: '民間備蓄',
+                        data: m.map(d => d.private_volume_10k_kl),
+                        borderColor: CHART_COLORS.orange,
+                        borderWidth: 2, tension: 0.3, pointRadius: 1
+                    },
+                    {
+                        label: '産油国共同備蓄',
+                        data: m.map(d => d.joint_volume_10k_kl),
+                        borderColor: CHART_COLORS.green,
+                        borderWidth: 2, tension: 0.3, pointRadius: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    x: { ticks: { maxTicksLimit: 12 } },
+                    y: { title: { display: true, text: '万kL' }, beginAtZero: false }
+                },
+                interaction: { intersect: false, mode: 'index' }
+            }
+        });
+    }
+
+    function buildReservePieChart() {
+        const m = reserveData.monthly;
+        const latest = m[m.length - 1];
+        const ctx = document.getElementById('reservePieChart').getContext('2d');
+        if (charts.reservePie) charts.reservePie.destroy();
+        charts.reservePie = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['国家備蓄', '民間備蓄', '産油国共同備蓄'],
+                datasets: [{
+                    data: [
+                        latest.national_volume_10k_kl,
+                        latest.private_volume_10k_kl,
+                        latest.joint_volume_10k_kl
+                    ],
+                    backgroundColor: [
+                        'rgba(41, 128, 185, 0.85)',
+                        'rgba(230, 126, 34, 0.85)',
+                        'rgba(39, 174, 96, 0.85)'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: { position: 'bottom' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(ctx) {
+                                const v = ctx.parsed;
+                                const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                                const pct = ((v / total) * 100).toFixed(1);
+                                return `${ctx.label}: ${v.toLocaleString()}万kL（${pct}%）`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // ============================================================
+    // Render All
+    // ============================================================
+    function renderAll() {
+        updateKPIs();
+        buildGasPriceChart();
+        buildFuelCompareChart();
+        buildKeroseneChart();
+        buildReserveDaysChart();
+        buildReserveVolumeChart();
+        buildReservePieChart();
+    }
+
+    // ============================================================
+    // Init & Refresh
+    // ============================================================
+    async function init() {
+        const el = document.getElementById('loading');
+        el.classList.add('active');
+        try {
+            await loadAllData();
+            renderAll();
+        } catch (e) {
+            console.error('Data load error:', e);
+            document.getElementById('dataSource').textContent = ' (データ読み込みエラー)';
+        } finally {
+            el.classList.remove('active');
+        }
+    }
+
+    async function refreshData() {
+        const btn = document.getElementById('refreshBtn');
+        btn.disabled = true;
+        btn.textContent = '更新中...';
+        try {
+            await loadAllData();
+            renderAll();
+            btn.textContent = '更新完了';
+            setTimeout(() => { btn.textContent = 'データ更新'; btn.disabled = false; }, 2000);
+        } catch (e) {
+            btn.textContent = '更新失敗';
+            setTimeout(() => { btn.textContent = 'データ更新'; btn.disabled = false; }, 2000);
+        }
+    }
+
+    // Auto-refresh every 30 minutes
+    setInterval(refreshData, 30 * 60 * 1000);
+
+    document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

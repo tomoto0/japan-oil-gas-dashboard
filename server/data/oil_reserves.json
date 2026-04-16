@@ -1,0 +1,285 @@
+{
+  "metadata": {
+    "title": "石油備蓄の現況",
+    "source": "資源エネルギー庁 石油備蓄の現況",
+    "source_url": "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/results.html",
+    "last_updated": "2026-02-16"
+  },
+  "monthly": [
+    {
+      "date": "2024-01",
+      "total_days": 242,
+      "national_days": 145,
+      "private_days": 90,
+      "joint_days": 7,
+      "total_volume_10k_kl": 6890,
+      "national_volume_10k_kl": 4098,
+      "private_volume_10k_kl": 2610,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-02",
+      "total_days": 243,
+      "national_days": 145,
+      "private_days": 91,
+      "joint_days": 7,
+      "total_volume_10k_kl": 6905,
+      "national_volume_10k_kl": 4100,
+      "private_volume_10k_kl": 2623,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-03",
+      "total_days": 244,
+      "national_days": 145,
+      "private_days": 92,
+      "joint_days": 7,
+      "total_volume_10k_kl": 6935,
+      "national_volume_10k_kl": 4102,
+      "private_volume_10k_kl": 2651,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-04",
+      "total_days": 245,
+      "national_days": 145,
+      "private_days": 93,
+      "joint_days": 7,
+      "total_volume_10k_kl": 6960,
+      "national_volume_10k_kl": 4105,
+      "private_volume_10k_kl": 2673,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-05",
+      "total_days": 246,
+      "national_days": 146,
+      "private_days": 93,
+      "joint_days": 7,
+      "total_volume_10k_kl": 6980,
+      "national_volume_10k_kl": 4108,
+      "private_volume_10k_kl": 2690,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-06",
+      "total_days": 247,
+      "national_days": 146,
+      "private_days": 94,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7005,
+      "national_volume_10k_kl": 4108,
+      "private_volume_10k_kl": 2715,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-07",
+      "total_days": 247,
+      "national_days": 146,
+      "private_days": 94,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7010,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2718,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-08",
+      "total_days": 248,
+      "national_days": 146,
+      "private_days": 95,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7030,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2738,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-09",
+      "total_days": 249,
+      "national_days": 146,
+      "private_days": 96,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7050,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2758,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-10",
+      "total_days": 250,
+      "national_days": 146,
+      "private_days": 97,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7080,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2788,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-11",
+      "total_days": 252,
+      "national_days": 146,
+      "private_days": 99,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7120,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2828,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2024-12",
+      "total_days": 253,
+      "national_days": 146,
+      "private_days": 100,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7140,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2848,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-01",
+      "total_days": 251,
+      "national_days": 146,
+      "private_days": 98,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7100,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2808,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-02",
+      "total_days": 250,
+      "national_days": 146,
+      "private_days": 97,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7085,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2793,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-03",
+      "total_days": 249,
+      "national_days": 146,
+      "private_days": 96,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7065,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2773,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-04",
+      "total_days": 248,
+      "national_days": 146,
+      "private_days": 95,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7040,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2748,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-05",
+      "total_days": 249,
+      "national_days": 146,
+      "private_days": 96,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7055,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2763,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-06",
+      "total_days": 250,
+      "national_days": 146,
+      "private_days": 97,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7075,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2783,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-07",
+      "total_days": 250,
+      "national_days": 146,
+      "private_days": 97,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7080,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2788,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-08",
+      "total_days": 251,
+      "national_days": 146,
+      "private_days": 98,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7095,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2803,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-09",
+      "total_days": 252,
+      "national_days": 146,
+      "private_days": 99,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7110,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2818,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-10",
+      "total_days": 253,
+      "national_days": 146,
+      "private_days": 100,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7130,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2838,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-11",
+      "total_days": 253,
+      "national_days": 146,
+      "private_days": 100,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7140,
+      "national_volume_10k_kl": 4110,
+      "private_volume_10k_kl": 2848,
+      "joint_volume_10k_kl": 182
+    },
+    {
+      "date": "2025-12",
+      "total_days": 254,
+      "national_days": 146,
+      "private_days": 101,
+      "joint_days": 7,
+      "total_volume_10k_kl": 7157,
+      "national_volume_10k_kl": 4111,
+      "private_volume_10k_kl": 2865,
+      "joint_volume_10k_kl": 181
+    },
+    {
+      "date": "2026-01",
+      "total_days": 248,
+      "national_days": 146,
+      "private_days": 96,
+      "joint_days": 6,
+      "total_volume_10k_kl": 7006,
+      "national_volume_10k_kl": 4111,
+      "private_volume_10k_kl": 2714,
+      "joint_volume_10k_kl": 181
+    }
+  ]
+}
