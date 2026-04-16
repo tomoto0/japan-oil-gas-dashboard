@@ -323,7 +323,7 @@
             <ul>
                 <li>ガソリン価格: <a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl007/results.html" target="_blank" rel="noopener">資源エネルギー庁 石油製品価格調査</a>（毎週月曜日調査・水曜日公表）</li>
                 <li>石油備蓄: <a href="https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/results.html" target="_blank" rel="noopener">資源エネルギー庁 石油備蓄の現況</a>（毎月公表）</li>
-                <li>データはバックエンドAPIより取得。ブラウザは30分ごとに自動更新します。</li>
+                <li>データはバックエンドAPIより取得。ブラウザは1日1回自動更新します（手動更新も可）。</li>
                 <li>備蓄日数はIEA基準（90日以上が目標水準）。</li>
             </ul>
         </div>
@@ -752,8 +752,8 @@
         }
     }
 
-    // Auto-refresh every 30 minutes
-    setInterval(refreshData, 30 * 60 * 1000);
+    // Auto-refresh once per day (24 hours)
+    setInterval(refreshData, 24 * 60 * 60 * 1000);
 
     document.addEventListener('DOMContentLoaded', init);
     </script>

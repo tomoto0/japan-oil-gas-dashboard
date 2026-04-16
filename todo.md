@@ -16,3 +16,5 @@
 - [x] Write vitest tests for REST API endpoints
 - [x] Run pnpm test - all 14 tests pass
 - [x] Save checkpoint
+- [x] Change auto-refresh interval from 30 minutes to once per day (24 hours) in dashboard.html
+- [ ] Compose Japanese promotional tweet (120 chars, with hashtags #石油備蓄 #ガソリン #ホルムズ海峡 #イラン情勢)
