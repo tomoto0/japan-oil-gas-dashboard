@@ -21,3 +21,7 @@
 - [x] Fix 500 error on /api/data/gasoline-prices and /api/data/oil-reserves (file path resolution fails in compiled server)
 - [x] Upload user-provided OGP image to CDN
 - [x] Update client/index.html with comprehensive SNS meta tags (OGP, Twitter Card, LINE, Facebook, etc.)
+- [x] Rebuild dashboard.html using design system tokens (colors_and_type.css) and all ui_kit components (Header, StatusBar, KPICard, ChartCard, Charts, SourceCard)
+- [x] Expand KPI grid to 4 price KPIs (regular, premium, diesel, kerosene) + 4 reserve KPIs (total, national, private, joint)
+- [x] Add kerosene price chart and reserve volume line chart from design system
+- [x] Update tests to reflect new dashboard structure
