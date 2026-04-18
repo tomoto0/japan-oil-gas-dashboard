@@ -110,6 +110,20 @@ describe("GET /api/data/gasoline-prices", () => {
     const res = await fetch(`${baseUrl}/api/data/gasoline-prices`);
     expect(res.headers.get("cache-control")).toContain("max-age=1800");
   });
+
+  it("has at least 40 weekly rows (data integrity check)", async () => {
+    const res = await fetch(`${baseUrl}/api/data/gasoline-prices`);
+    const data = await res.json();
+    expect(data.weekly.length).toBeGreaterThanOrEqual(40);
+  });
+
+  it("last_updated is in YYYY-MM-DD format and not older than 2026-01-01", async () => {
+    const res = await fetch(`${baseUrl}/api/data/gasoline-prices`);
+    const data = await res.json();
+    const updated = data.metadata.last_updated;
+    expect(updated).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(updated >= "2026-01-01").toBe(true);
+  });
 });
 
 // ---------------------------------------------------------------
@@ -170,5 +184,19 @@ describe("GET /api/data/oil-reserves", () => {
   it("sets Cache-Control header", async () => {
     const res = await fetch(`${baseUrl}/api/data/oil-reserves`);
     expect(res.headers.get("cache-control")).toContain("max-age=1800");
+  });
+
+  it("has at least 24 monthly rows (data integrity check)", async () => {
+    const res = await fetch(`${baseUrl}/api/data/oil-reserves`);
+    const data = await res.json();
+    expect(data.monthly.length).toBeGreaterThanOrEqual(24);
+  });
+
+  it("last_updated is in YYYY-MM format and not older than 2026-01", async () => {
+    const res = await fetch(`${baseUrl}/api/data/oil-reserves`);
+    const data = await res.json();
+    const updated = data.metadata.last_updated;
+    expect(updated).toMatch(/^\d{4}-\d{2}$/);
+    expect(updated >= "2026-01").toBe(true);
   });
 });

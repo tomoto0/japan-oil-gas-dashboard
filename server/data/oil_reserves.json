@@ -3,7 +3,7 @@
     "title": "石油備蓄の現況",
     "source": "資源エネルギー庁 石油備蓄の現況",
     "source_url": "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl001/results.html",
-    "last_updated": "2026-02-16"
+    "last_updated": "2026-03"
   },
   "monthly": [
     {
@@ -279,7 +279,32 @@
       "total_volume_10k_kl": 7006,
       "national_volume_10k_kl": 4111,
       "private_volume_10k_kl": 2714,
-      "joint_volume_10k_kl": 181
+      "joint_volume_10k_kl": 181,
+      "source_note": "資源エネルギー庁 公式データ (indb.co.jp経由)"
+    },
+    {
+      "date": "2026-02",
+      "total_days": 254,
+      "national_days": 148,
+      "private_days": 100,
+      "joint_days": 6,
+      "total_volume_10k_kl": 7150,
+      "national_volume_10k_kl": 4200,
+      "private_volume_10k_kl": 2770,
+      "joint_volume_10k_kl": 180,
+      "source_note": "推計値 (高市首相発言3/2「254日分」+ 前後月トレンド)"
+    },
+    {
+      "date": "2026-03",
+      "total_days": 241,
+      "national_days": 146,
+      "private_days": 89,
+      "joint_days": 6,
+      "total_volume_10k_kl": 6820,
+      "national_volume_10k_kl": 4100,
+      "private_volume_10k_kl": 2540,
+      "joint_volume_10k_kl": 180,
+      "source_note": "速報値 (Argus Media 3/20速報: 241日, 国家146日, 民間89日)"
     }
   ]
 }
