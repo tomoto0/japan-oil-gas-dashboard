@@ -111,10 +111,11 @@ describe("GET /api/data/gasoline-prices", () => {
     expect(res.headers.get("cache-control")).toContain("max-age=1800");
   });
 
-  it("has at least 40 weekly rows (data integrity check)", async () => {
+  it("has at least 35 rows (monthly 2024-2025 + weekly 2026 data integrity check)", async () => {
     const res = await fetch(`${baseUrl}/api/data/gasoline-prices`);
     const data = await res.json();
-    expect(data.weekly.length).toBeGreaterThanOrEqual(40);
+    // 24 monthly rows (2024-01 to 2025-12) + 13+ weekly rows (2026-02 onwards)
+    expect(data.weekly.length).toBeGreaterThanOrEqual(35);
   });
 
   it("last_updated is in YYYY-MM-DD format and not older than 2026-01-01", async () => {

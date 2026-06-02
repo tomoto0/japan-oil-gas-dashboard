@@ -2,283 +2,186 @@
   "metadata": {
     "title": "レギュラーガソリン全国平均小売価格",
     "unit": "円/L",
-    "source": "資源エネルギー庁 石油製品価格調査",
+    "source": "pps-net.org (資源エネルギー庁 石油製品価格調査)",
     "source_url": "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl007/results.html",
-    "last_updated": "2026-05-25"
+    "last_updated": "2026-05-25",
+    "note": "2024-2025年は月次平均、2026年2月以降は週次データ"
   },
   "weekly": [
     {
-      "date": "2024-01-15",
-      "regular": 174.7,
-      "premium": 185.5,
-      "diesel": 155.1,
-      "kerosene_18L": 2117
+      "date": "2024-01-01",
+      "regular": 175.3,
+      "premium": 186,
+      "diesel": 154.9,
+      "kerosene_18L": 2104
     },
     {
-      "date": "2024-02-05",
-      "regular": 174.8,
-      "premium": 185.6,
-      "diesel": 155.3,
-      "kerosene_18L": 2112
+      "date": "2024-02-01",
+      "regular": 174.5,
+      "premium": 185.3,
+      "diesel": 154.2,
+      "kerosene_18L": 2101
     },
     {
-      "date": "2024-03-04",
-      "regular": 174.6,
-      "premium": 185.4,
-      "diesel": 155,
-      "kerosene_18L": 2098
+      "date": "2024-03-01",
+      "regular": 174.4,
+      "premium": 185.2,
+      "diesel": 154.1,
+      "kerosene_18L": 2099
     },
     {
       "date": "2024-04-01",
       "regular": 174.8,
+      "premium": 185.6,
+      "diesel": 154.5,
+      "kerosene_18L": 2104
+    },
+    {
+      "date": "2024-05-01",
+      "regular": 174.8,
       "premium": 185.5,
-      "diesel": 155.2,
-      "kerosene_18L": 2085
+      "diesel": 154.5,
+      "kerosene_18L": 2106
     },
     {
-      "date": "2024-05-07",
-      "regular": 175.1,
-      "premium": 185.9,
-      "diesel": 155.4,
-      "kerosene_18L": 2073
-    },
-    {
-      "date": "2024-06-03",
-      "regular": 175.3,
-      "premium": 186,
-      "diesel": 155.6,
-      "kerosene_18L": 2058
+      "date": "2024-06-01",
+      "regular": 174.8,
+      "premium": 185.5,
+      "diesel": 154.5,
+      "kerosene_18L": 2108
     },
     {
       "date": "2024-07-01",
-      "regular": 175.5,
-      "premium": 186.3,
-      "diesel": 155.9,
-      "kerosene_18L": 2045
+      "regular": 175.6,
+      "premium": 186.4,
+      "diesel": 155.2,
+      "kerosene_18L": 2115
     },
     {
-      "date": "2024-08-05",
-      "regular": 175.2,
-      "premium": 186,
-      "diesel": 155.7,
-      "kerosene_18L": 2040
-    },
-    {
-      "date": "2024-09-02",
-      "regular": 174.4,
-      "premium": 185.2,
-      "diesel": 155,
-      "kerosene_18L": 2052
-    },
-    {
-      "date": "2024-10-07",
-      "regular": 175,
-      "premium": 185.8,
-      "diesel": 155.5,
-      "kerosene_18L": 2078
-    },
-    {
-      "date": "2024-11-05",
-      "regular": 175.3,
-      "premium": 186.1,
-      "diesel": 155.7,
-      "kerosene_18L": 2095
-    },
-    {
-      "date": "2024-12-02",
-      "regular": 175.5,
-      "premium": 186.3,
-      "diesel": 155.8,
+      "date": "2024-08-01",
+      "regular": 174.6,
+      "premium": 185.4,
+      "diesel": 154.3,
       "kerosene_18L": 2110
     },
     {
-      "date": "2025-01-06",
-      "regular": 175.3,
-      "premium": 186,
-      "diesel": 155.6,
-      "kerosene_18L": 2120
+      "date": "2024-09-01",
+      "regular": 174.6,
+      "premium": 185.3,
+      "diesel": 154.3,
+      "kerosene_18L": 2108
     },
     {
-      "date": "2025-02-03",
-      "regular": 175,
-      "premium": 185.8,
-      "diesel": 155.3,
-      "kerosene_18L": 2118
+      "date": "2024-10-01",
+      "regular": 174.9,
+      "premium": 185.6,
+      "diesel": 154.5,
+      "kerosene_18L": 2111
     },
     {
-      "date": "2025-03-03",
-      "regular": 174.8,
+      "date": "2024-11-01",
+      "regular": 174.7,
       "premium": 185.5,
-      "diesel": 155.1,
-      "kerosene_18L": 2105
+      "diesel": 154.5,
+      "kerosene_18L": 2110
     },
     {
-      "date": "2025-04-07",
-      "regular": 175.1,
-      "premium": 185.9,
-      "diesel": 155.4,
-      "kerosene_18L": 2085
+      "date": "2024-12-01",
+      "regular": 176.9,
+      "premium": 187.7,
+      "diesel": 156.6,
+      "kerosene_18L": 2138
     },
     {
-      "date": "2025-05-06",
-      "regular": 175.4,
-      "premium": 186.2,
-      "diesel": 155.6,
-      "kerosene_18L": 2068
+      "date": "2025-01-01",
+      "regular": 182.9,
+      "premium": 193.6,
+      "diesel": 162.5,
+      "kerosene_18L": 2245
     },
     {
-      "date": "2025-06-02",
-      "regular": 175.6,
-      "premium": 186.4,
-      "diesel": 155.8,
-      "kerosene_18L": 2050
+      "date": "2025-02-01",
+      "regular": 184.5,
+      "premium": 195.3,
+      "diesel": 164.2,
+      "kerosene_18L": 2282
     },
     {
-      "date": "2025-07-07",
-      "regular": 175.8,
-      "premium": 186.5,
-      "diesel": 156,
-      "kerosene_18L": 2040
+      "date": "2025-03-01",
+      "regular": 184.4,
+      "premium": 195.2,
+      "diesel": 164.2,
+      "kerosene_18L": 2284
     },
     {
-      "date": "2025-08-04",
-      "regular": 175.5,
-      "premium": 186.2,
-      "diesel": 155.7,
-      "kerosene_18L": 2035
+      "date": "2025-04-01",
+      "regular": 185.6,
+      "premium": 196.4,
+      "diesel": 165.3,
+      "kerosene_18L": 2300
+    },
+    {
+      "date": "2025-05-01",
+      "regular": 180.9,
+      "premium": 191.6,
+      "diesel": 160.8,
+      "kerosene_18L": 2254
+    },
+    {
+      "date": "2025-06-01",
+      "regular": 172.9,
+      "premium": 183.7,
+      "diesel": 153.2,
+      "kerosene_18L": 2192
+    },
+    {
+      "date": "2025-07-01",
+      "regular": 173.6,
+      "premium": 184.4,
+      "diesel": 153.8,
+      "kerosene_18L": 2207
+    },
+    {
+      "date": "2025-08-01",
+      "regular": 174.5,
+      "premium": 185.2,
+      "diesel": 154.6,
+      "kerosene_18L": 2218
     },
     {
       "date": "2025-09-01",
-      "regular": 175.2,
-      "premium": 186,
-      "diesel": 155.5,
-      "kerosene_18L": 2048
+      "regular": 174.9,
+      "premium": 185.7,
+      "diesel": 155,
+      "kerosene_18L": 2225
     },
     {
-      "date": "2025-10-06",
-      "regular": 175.7,
-      "premium": 186.5,
-      "diesel": 155.9,
-      "kerosene_18L": 2072
+      "date": "2025-10-01",
+      "regular": 174.5,
+      "premium": 184.3,
+      "diesel": 154.6,
+      "kerosene_18L": 2221
     },
     {
-      "date": "2025-11-04",
-      "regular": 175.3,
-      "premium": 186.1,
-      "diesel": 155.6,
-      "kerosene_18L": 2090
+      "date": "2025-11-01",
+      "regular": 171.4,
+      "premium": 182.2,
+      "diesel": 151.7,
+      "kerosene_18L": 2207
     },
     {
       "date": "2025-12-01",
-      "regular": 161.1,
-      "premium": 171.8,
-      "diesel": 143.5,
-      "kerosene_18L": 2085
+      "regular": 161.6,
+      "premium": 172.3,
+      "diesel": 146.3,
+      "kerosene_18L": 2201
     },
     {
-      "date": "2025-12-08",
-      "regular": 163.7,
-      "premium": 174.4,
-      "diesel": 145.2,
-      "kerosene_18L": 2080
-    },
-    {
-      "date": "2025-12-15",
-      "regular": 159.7,
-      "premium": 170.3,
-      "diesel": 141.8,
-      "kerosene_18L": 2075
-    },
-    {
-      "date": "2025-12-22",
-      "regular": 153.7,
-      "premium": 164.2,
-      "diesel": 136.4,
-      "kerosene_18L": 2070
-    },
-    {
-      "date": "2026-01-05",
-      "regular": 155.7,
-      "premium": 166.3,
-      "diesel": 138,
-      "kerosene_18L": 2065
-    },
-    {
-      "date": "2026-01-13",
-      "regular": 154.2,
-      "premium": 164.8,
-      "diesel": 136.8,
-      "kerosene_18L": 2060
-    },
-    {
-      "date": "2026-01-19",
-      "regular": 154.7,
-      "premium": 165.5,
-      "diesel": 143,
-      "kerosene_18L": 2173
-    },
-    {
-      "date": "2026-01-20",
-      "regular": 153.5,
-      "premium": 164,
-      "diesel": 136.2,
-      "kerosene_18L": 2058
-    },
-    {
-      "date": "2026-01-26",
-      "regular": 155.4,
-      "premium": 166.3,
-      "diesel": 143.8,
-      "kerosene_18L": 2182
-    },
-    {
-      "date": "2026-01-27",
-      "regular": 153.8,
-      "premium": 164.4,
-      "diesel": 136.5,
-      "kerosene_18L": 2055
-    },
-    {
-      "date": "2026-02-02",
-      "regular": 155.6,
-      "premium": 166.4,
-      "diesel": 143.9,
-      "kerosene_18L": 2183
-    },
-    {
-      "date": "2026-02-03",
-      "regular": 154.5,
-      "premium": 165,
-      "diesel": 137,
-      "kerosene_18L": 2050
-    },
-    {
-      "date": "2026-02-09",
-      "regular": 155.5,
-      "premium": 166.3,
-      "diesel": 143.8,
-      "kerosene_18L": 2183
-    },
-    {
-      "date": "2026-02-10",
+      "date": "2026-01-01",
       "regular": 155.2,
-      "premium": 165.8,
-      "diesel": 137.6,
-      "kerosene_18L": 2048
-    },
-    {
-      "date": "2026-02-16",
-      "regular": 156.7,
-      "premium": 167.5,
-      "diesel": 144.9,
-      "kerosene_18L": 2196
-    },
-    {
-      "date": "2026-02-17",
-      "regular": 156.8,
-      "premium": 167.4,
-      "diesel": 139,
-      "kerosene_18L": 2045
+      "premium": 166.1,
+      "diesel": 143.5,
+      "kerosene_18L": 2178
     },
     {
       "date": "2026-02-24",

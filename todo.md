@@ -29,3 +29,7 @@
 - [x] Add data source notes to oil_reserves.json entries marking 2026-02 as estimated and 2026-03 as preliminary
 - [x] Add vitest tests for updated data integrity (last_updated freshness, row count minimums) - covered by existing data-api.test.ts (14 tests pass)
 - [x] Implement real server-side POST /api/data/refresh endpoint that scrapes pps-net.org (chartData11) and merges latest weekly gasoline prices into JSON; updated dashboard refresh button to call this endpoint
+- [x] Fix gasoline_prices.json: removed duplicates, filled 2024-2025 monthly data from pps-net.org HTML table, 38 rows total (2024-01 to 2026-05-25)
+- [x] Update POST /api/data/refresh to parse full monthly table (title2 section) + weekly chartData11, all charts now cover 2024-01 to latest date
+- [x] Document data resolution: pps-net.org only exposes monthly averages for 2024-2025 (no full weekly history available publicly); 2026 data is weekly via chartData11. This is the maximum resolution available from the source.
+- [x] No duplicate dates in current gasoline_prices.json (verified: 38 unique dates, 2024-01-01 to 2026-05-25)
