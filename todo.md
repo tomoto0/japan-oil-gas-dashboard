@@ -28,3 +28,4 @@
 - [x] Fix stale data: updated gasoline to 2026-04-13 (47 rows, source: pps-net.org/資源エネルギー庁) and reserves to 2026-03 (27 rows, source: indb.co.jp/argusmedia)
 - [x] Add data source notes to oil_reserves.json entries marking 2026-02 as estimated and 2026-03 as preliminary
 - [x] Add vitest tests for updated data integrity (last_updated freshness, row count minimums) - covered by existing data-api.test.ts (14 tests pass)
+- [x] Implement real server-side POST /api/data/refresh endpoint that scrapes pps-net.org (chartData11) and merges latest weekly gasoline prices into JSON; updated dashboard refresh button to call this endpoint

@@ -4,7 +4,7 @@
     "unit": "円/L",
     "source": "資源エネルギー庁 石油製品価格調査",
     "source_url": "https://www.enecho.meti.go.jp/statistics/petroleum_and_lpgas/pl007/results.html",
-    "last_updated": "2026-04-13"
+    "last_updated": "2026-05-25"
   },
   "weekly": [
     {
@@ -25,7 +25,7 @@
       "date": "2024-03-04",
       "regular": 174.6,
       "premium": 185.4,
-      "diesel": 155.0,
+      "diesel": 155,
       "kerosene_18L": 2098
     },
     {
@@ -45,7 +45,7 @@
     {
       "date": "2024-06-03",
       "regular": 175.3,
-      "premium": 186.0,
+      "premium": 186,
       "diesel": 155.6,
       "kerosene_18L": 2058
     },
@@ -59,7 +59,7 @@
     {
       "date": "2024-08-05",
       "regular": 175.2,
-      "premium": 186.0,
+      "premium": 186,
       "diesel": 155.7,
       "kerosene_18L": 2040
     },
@@ -67,12 +67,12 @@
       "date": "2024-09-02",
       "regular": 174.4,
       "premium": 185.2,
-      "diesel": 155.0,
+      "diesel": 155,
       "kerosene_18L": 2052
     },
     {
       "date": "2024-10-07",
-      "regular": 175.0,
+      "regular": 175,
       "premium": 185.8,
       "diesel": 155.5,
       "kerosene_18L": 2078
@@ -94,13 +94,13 @@
     {
       "date": "2025-01-06",
       "regular": 175.3,
-      "premium": 186.0,
+      "premium": 186,
       "diesel": 155.6,
       "kerosene_18L": 2120
     },
     {
       "date": "2025-02-03",
-      "regular": 175.0,
+      "regular": 175,
       "premium": 185.8,
       "diesel": 155.3,
       "kerosene_18L": 2118
@@ -137,7 +137,7 @@
       "date": "2025-07-07",
       "regular": 175.8,
       "premium": 186.5,
-      "diesel": 156.0,
+      "diesel": 156,
       "kerosene_18L": 2040
     },
     {
@@ -150,7 +150,7 @@
     {
       "date": "2025-09-01",
       "regular": 175.2,
-      "premium": 186.0,
+      "premium": 186,
       "diesel": 155.5,
       "kerosene_18L": 2048
     },
@@ -200,7 +200,7 @@
       "date": "2026-01-05",
       "regular": 155.7,
       "premium": 166.3,
-      "diesel": 138.0,
+      "diesel": 138,
       "kerosene_18L": 2065
     },
     {
@@ -214,13 +214,13 @@
       "date": "2026-01-19",
       "regular": 154.7,
       "premium": 165.5,
-      "diesel": 143.0,
+      "diesel": 143,
       "kerosene_18L": 2173
     },
     {
       "date": "2026-01-20",
       "regular": 153.5,
-      "premium": 164.0,
+      "premium": 164,
       "diesel": 136.2,
       "kerosene_18L": 2058
     },
@@ -248,8 +248,8 @@
     {
       "date": "2026-02-03",
       "regular": 154.5,
-      "premium": 165.0,
-      "diesel": 137.0,
+      "premium": 165,
+      "diesel": 137,
       "kerosene_18L": 2050
     },
     {
@@ -277,7 +277,7 @@
       "date": "2026-02-17",
       "regular": 156.8,
       "premium": 167.4,
-      "diesel": 139.0,
+      "diesel": 139,
       "kerosene_18L": 2045
     },
     {
@@ -312,14 +312,14 @@
       "date": "2026-03-23",
       "regular": 177.7,
       "premium": 188.4,
-      "diesel": 166.0,
+      "diesel": 166,
       "kerosene_18L": 2621
     },
     {
       "date": "2026-03-30",
       "regular": 170.2,
       "premium": 180.9,
-      "diesel": 159.0,
+      "diesel": 159,
       "kerosene_18L": 2534
     },
     {
@@ -335,6 +335,41 @@
       "premium": 178.3,
       "diesel": 156.7,
       "kerosene_18L": 2498
+    },
+    {
+      "date": "2026-04-20",
+      "regular": 169.5,
+      "premium": 180.3,
+      "diesel": 158.8,
+      "kerosene_18L": 2520
+    },
+    {
+      "date": "2026-04-27",
+      "regular": 169.7,
+      "premium": 180.5,
+      "diesel": 159,
+      "kerosene_18L": 2525
+    },
+    {
+      "date": "2026-05-11",
+      "regular": 169.4,
+      "premium": 180.2,
+      "diesel": 158.8,
+      "kerosene_18L": 2522
+    },
+    {
+      "date": "2026-05-18",
+      "regular": 169.2,
+      "premium": 180,
+      "diesel": 158.6,
+      "kerosene_18L": 2518
+    },
+    {
+      "date": "2026-05-25",
+      "regular": 169.2,
+      "premium": 180.1,
+      "diesel": 158.5,
+      "kerosene_18L": 2522
     }
   ]
 }

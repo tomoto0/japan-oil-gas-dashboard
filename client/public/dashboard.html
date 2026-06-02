@@ -445,12 +445,24 @@
 
       const onRefresh = () => {
         setRefreshState('loading');
-        Promise.all([
-          fetch(`/api/data/gasoline-prices?t=${Date.now()}`),
-          fetch(`/api/data/oil-reserves?t=${Date.now()}`),
-        ])
-          .then(() => { setRefreshState('done'); setTimeout(() => { setRefreshState('idle'); window.location.reload(); }, 1000); })
-          .catch(() => { setRefreshState('error'); setTimeout(() => setRefreshState('idle'), 2000); });
+        // POST to the server-side refresh endpoint which scrapes pps-net.org for latest data
+        fetch('/api/data/refresh', { method: 'POST' })
+          .then(r => r.json())
+          .then(result => {
+            if (result.success) {
+              setRefreshState('done');
+              setTimeout(() => { setRefreshState('idle'); window.location.reload(); }, 1200);
+            } else {
+              console.error('[Refresh] Server error:', result.error);
+              setRefreshState('error');
+              setTimeout(() => setRefreshState('idle'), 3000);
+            }
+          })
+          .catch(err => {
+            console.error('[Refresh] Network error:', err);
+            setRefreshState('error');
+            setTimeout(() => setRefreshState('idle'), 3000);
+          });
       };
 
       return (
